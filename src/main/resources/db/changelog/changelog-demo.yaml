@@ -1,0 +1,56 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: sylwester.lew
+      changes:
+        - createTable:
+            tableName: DEMO_USERS
+            columns:
+              - column:
+                  name: ID
+                  type: long
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: LOGIN
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: ROLE
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 2
+      author: sylwester.lew
+      changes:
+        - insert:
+            tableName: DEMO_USERS
+            columns:
+              - column:
+                  name: LOGIN
+                  value: reader
+              - column:
+                  name: ROLE
+                  value: READ
+        - insert:
+            tableName: DEMO_USERS
+            columns:
+              - column:
+                  name: LOGIN
+                  value: admin
+              - column:
+                  name: ROLE
+                  value: WRITE
+
+  - changeSet:
+      id: 3
+      author: sylwester.lew
+      changes:
+        - createSequence:
+            sequenceName: "user_sequence"
+            startValue: 3
